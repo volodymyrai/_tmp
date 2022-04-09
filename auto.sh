@@ -20,7 +20,7 @@ debug="--debug"
 while true
 do
    pkill -f start.py; pkill -f runner.py 
-   #sleep $[ ( $RANDOM % 10 )  + 1 ]m
+   sleep $[ ( $RANDOM % 10 )  + 1 ]m
    
    # Get number of targets. Sometimes list_size = 0 (network or github problem). So here is check to avoid script error.
    list_size=$(curl -s https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets | cat | grep "^[^#]" | wc -l)
