@@ -11,7 +11,7 @@ sudo rm -r mhddos_proxy
 git clone https://github.com/porthole-ascend-cinnamon/mhddos_proxy.git
 python3 -m pip install -r ~/mhddos_proxy/requirements.txt
 
-threads="${1:-650}"
+threads="${1:-800}"
 rpc="--rpc 2000"
 proxy_upd="-p 1200"
 debug="--debug"
