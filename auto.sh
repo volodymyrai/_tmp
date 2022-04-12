@@ -44,5 +44,5 @@ do
       python3 ~/mhddos_proxy/runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug &
    done
    
-   sleep 60m
+   sleep $[ ( $RANDOM % 25 )  + 55 ]m
 done
