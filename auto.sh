@@ -13,7 +13,7 @@ git clone https://github.com/porthole-ascend-cinnamon/mhddos_proxy.git
 cd mhddos_proxy/
 python3 -m pip install -r requirements.txt
 
-threads="${1:-600}"
+threads="${1:-400}"
 rpc="--rpc 2000"
 proxy_upd="-p 1200"
 debug="--debug"
